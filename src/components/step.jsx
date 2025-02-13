@@ -1,8 +1,8 @@
 // eslint-disable-next-line react/prop-types
-export default function Step({number, title, active}){
+export default function Step({number, title, active, setStep}){
     return (
         <div className="flex items-center gap-3 h-fit">
-            <div className={`rounded-full border-[1px] border-white ${active == number && 'bg-[#bfe2fd] text-black' } px-3 py-1 font-bold`}>
+            <div onClick={()=>setStep(number)} className={`cursor-pointer rounded-full border-[1px] border-white ${active == number && 'bg-[#bfe2fd] text-black' } px-3 py-1 font-bold`}>
                 {number}
             </div>
             <div className="hidden sm:inline h-fit">

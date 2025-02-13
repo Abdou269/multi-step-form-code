@@ -31,10 +31,10 @@ export default function App(){
                     <div className={`flex justify-center sm:h-[95%] h-[25%] sm:w-[250px] text-nowrap p-6 text-white sm:rounded-xl w-full 
                         sm:bg-[url("./assets/bg-sidebar-desktop.svg")] bg-[url("./assets/bg-sidebar-mobile.svg")] bg-cover rounded-none`}>
                         <div className='flex sm:flex-col gap-6 uppercase h-fit'>
-                            <Step number={1} title={"your info"} active={step}></Step>
-                            <Step number={2} title={"select plan"} active={step}></Step>
-                            <Step number={3} title={"add-ons"} active={step}></Step>
-                            <Step number={4} title={"summary"} active={step}></Step>
+                            <Step number={1} title={"your info"} active={step} setStep={setStep}></Step>
+                            <Step number={2} title={"select plan"} active={step} setStep={setStep}></Step>
+                            <Step number={3} title={"add-ons"} active={step} setStep={setStep}></Step>
+                            <Step number={4} title={"summary"} active={step} setStep={setStep}></Step>
                         </div>
                     </div>
                     <div className='flex items-center justify-center flex-col w-full h-[90%]'>
