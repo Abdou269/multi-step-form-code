@@ -26,50 +26,56 @@ export default function App(){
 
     return (
         <context.Provider value={[step, setStep, dataDispatch, newData, data.addons]}>
-            <div className='flex justify-center items-center h-full w-full sm:px-3 p-0 flex-col sm:flex-row'>
-                <div className={`flex justify-center sm:h-[95%] h-[25%] sm:w-[250px] text-nowrap p-6 text-white sm:rounded-xl w-full 
-                    sm:bg-[url("./assets/bg-sidebar-desktop.svg")] bg-[url("./assets/bg-sidebar-mobile.svg")] bg-cover rounded-none`}>
-                    <div className='flex sm:flex-col gap-6 uppercase h-fit'>
-                        <Step number={1} title={"your info"} active={step}></Step>
-                        <Step number={2} title={"select plan"} active={step}></Step>
-                        <Step number={3} title={"add-ons"} active={step}></Step>
-                        <Step number={4} title={"summary"} active={step}></Step>
-                    </div>
-                </div>
-                <div className='flex items-center justify-center flex-col w-full h-[90%]'>
-                    <div className='flex flex-col items-center justify-center h-full w-full'>
-                        <div className='flex justify-center items-center h-full w-full'>
-                            <div className='flex flex-col items-center sm:w-11/12 h-full w-[90%]'>
-                                {step == 1 && <Info formRef={formRef}></Info>}   
-                                {step == 2 && <Plan></Plan>}
-                                {step == 3 && <Addons></Addons>}
-                                {step == 4 && <Summary></Summary>}
-                                {step == 5 && <Finish></Finish>}
-                            </div>
+            <div className='flex flex-col h-full'>
+                <div className='flex justify-center items-center h-full w-full sm:px-3 p-0 flex-col sm:flex-row'>
+                    <div className={`flex justify-center sm:h-[95%] h-[25%] sm:w-[250px] text-nowrap p-6 text-white sm:rounded-xl w-full 
+                        sm:bg-[url("./assets/bg-sidebar-desktop.svg")] bg-[url("./assets/bg-sidebar-mobile.svg")] bg-cover rounded-none`}>
+                        <div className='flex sm:flex-col gap-6 uppercase h-fit'>
+                            <Step number={1} title={"your info"} active={step}></Step>
+                            <Step number={2} title={"select plan"} active={step}></Step>
+                            <Step number={3} title={"add-ons"} active={step}></Step>
+                            <Step number={4} title={"summary"} active={step}></Step>
                         </div>
                     </div>
-                    {
-                        step < 5 && 
-                        (
-                            <div className="flex items-center justify-between sm:w-[80%] gap-2 px-4 py-4 bg-white w-full">
-                                <p className={`${step == 1 ? 'opacity-0 cursor-default' : 'cursor-pointer'} font-semibold text-[#9699ab] hover:text-black`} onClick={() => step > 1 && setStep(step - 1)}>Go Back</p>
-                                <button 
-                                    onClick={() => { 
-                                        if (step == 1){
-                                            formRef.current.requestSubmit();
-                                        }
-                                        else {
-                                            setStep(step + 1);
-                                            step == 4 && localStorage.setItem("User-Data", JSON.stringify(newData));
-                                        }
-                                    }}
-                                    className={`${step == 4 ? 'bg-[#473dff]' : 'bg-[#02295a]'} text-white p-2 px-5 rounded-[8px] hover:bg-[#011f45]`}
-                                >
-                                    {step < 4 ? "Next Step" : "confirm"}
-                                </button>
+                    <div className='flex items-center justify-center flex-col w-full h-[90%]'>
+                        <div className='flex flex-col items-center justify-center h-full w-full'>
+                            <div className='flex justify-center items-center h-full w-full'>
+                                <div className='flex flex-col items-center sm:w-11/12 h-full w-[90%]'>
+                                    {step == 1 && <Info formRef={formRef}></Info>}   
+                                    {step == 2 && <Plan></Plan>}
+                                    {step == 3 && <Addons></Addons>}
+                                    {step == 4 && <Summary></Summary>}
+                                    {step == 5 && <Finish></Finish>}
+                                </div>
                             </div>
-                        )
-                    }
+                        </div>
+                        {
+                            step < 5 && 
+                            (
+                                <div className="flex items-center justify-between sm:w-[80%] gap-2 px-4 py-4 bg-white w-full">
+                                    <p className={`${step == 1 ? 'opacity-0 cursor-default' : 'cursor-pointer'} font-semibold text-[#9699ab] hover:text-black`} onClick={() => step > 1 && setStep(step - 1)}>Go Back</p>
+                                    <button 
+                                        onClick={() => { 
+                                            if (step == 1){
+                                                formRef.current.requestSubmit();
+                                            }
+                                            else {
+                                                setStep(step + 1);
+                                                step == 4 && localStorage.setItem("User-Data", JSON.stringify(newData));
+                                            }
+                                        }}
+                                        className={`${step == 4  ? 'bg-[#473dff]' : 'bg-[#02295a]'} text-white p-2 px-5 rounded-[8px] hover:bg-[#011f45]`}
+                                    >
+                                        {step < 4 ? "Next Step" : "confirm"}
+                                    </button>
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+                <div className="attribution">
+                    Challenge by <a href="https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ" target="_blank">Frontend Mentor</a>. 
+                    Coded by <a href="https://www.frontendmentor.io/profile/Abdou269" target="_blank">Abdou269</a>.
                 </div>
             </div>
         </context.Provider>
