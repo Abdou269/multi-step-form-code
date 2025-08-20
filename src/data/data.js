@@ -22,3 +22,24 @@ export const plans = [
         yearPrice: 150
     },
 ]
+
+export const addons = [
+    {
+        name : 'Online service',
+        desc: 'Access to multiplayer games',
+        monthPrice: 1,
+        yearPrice: 10
+    },
+    {
+        name : 'Larger storage',
+        desc: 'Extra 1TB of cloud save',
+        monthPrice: 2,
+        yearPrice: 20
+    },
+    {
+        name : 'Customizable profile',
+        desc: 'Custom theme on your profile',
+        monthPrice: 2,
+        yearPrice: 20
+    }
+]

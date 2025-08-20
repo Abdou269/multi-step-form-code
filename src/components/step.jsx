@@ -1,8 +1,23 @@
+import { useContext } from "react";
+import { context } from "../context/context";
+
 // eslint-disable-next-line react/prop-types
-export default function Step({number, title, active, setStep}){
+export default function Step({number, title, formRef}){
+    const {step, setStep, targetRef} = useContext(context);
+
     return (
         <div className="flex items-center gap-3 h-fit">
-            <div onClick={()=>setStep(number)} className={`cursor-pointer rounded-full border-[1px] border-white ${active == number && 'bg-[#bfe2fd] text-black' } px-3 py-1 font-bold`}>
+            <div 
+                onClick={() => {
+                    if (step === 1) {
+                        targetRef.current = number;
+                        formRef.current.requestSubmit();
+                    } else {
+                        setStep(number);
+                    }
+                }}
+                className={`cursor-pointer rounded-full border-[1px] border-white ${step == number && 'bg-[#bfe2fd] text-black' } px-3 py-1 font-bold`}
+            >
                 {number}
             </div>
             <div className="hidden sm:inline h-fit">

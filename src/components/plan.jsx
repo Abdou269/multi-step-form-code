@@ -2,17 +2,13 @@
 import { useContext, useEffect, useState } from "react";
 import { context } from "../context/context";
 import Structure from "./structure";
-import {plans} from "../plans/plans";
+import {plans} from "../data/data";
 
 export default function Plan(){
-    const [,, dataDispatch, newData, oldAddons] = useContext(context);
-    const [click, setClick] = useState(newData.yearly);
+    const { dataDispatch, newData } = useContext(context);
     const [active, setActive] = useState(newData.plan);
-    const changeMode = () => {
-        setClick(!click);
-        dataDispatch({type: 'yearly', payload: !click});
-        dataDispatch({type: 'addons', payload: oldAddons});
-    }
+    const yearly = newData.yearly;
+    
     useEffect(() => {
         dataDispatch({type: "plan", payload: active});
     }, [active, dataDispatch])
@@ -30,8 +26,8 @@ export default function Plan(){
                             plan={plan}
                             active={active.name}
                             setActive={setActive}
-                            price={!click ? plan.monthPrice : plan.yearPrice}
-                            mode={click}
+                            price={!yearly ? plan.monthPrice : plan.yearPrice}
+                            mode={yearly}
                         >
                             <img src={plan.iconSrc} width="40" height="40" />
                         </Card>
@@ -41,10 +37,10 @@ export default function Plan(){
                 <div className="flex justify-center gap-8 bg-[#f0f6ff] p-2 rounded-m w-full">
                     <h1>Monthly</h1>
                     <div 
-                        onClick={changeMode} 
+                        onClick={_=> dataDispatch({type: 'yearly', payload: !yearly})} 
                         className={`flex items-center p-1 bg-[#02295a] h-[25px] w-[50px] rounded-2xl cursor-pointer`}
                     >
-                        <div className={`relative left-0 ${click && 'left-[62%]'} rounded-full bg-[white] h-[15px] w-[15px]`}></div>
+                        <div className={`relative left-0 ${yearly && 'left-[62%]'} rounded-full bg-[white] h-[15px] w-[15px]`}></div>
                     </div>
                     <h1>Yearly</h1>
                 </div>

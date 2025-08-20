@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { context } from "../context/context";
 import Structure from "./structure";
+import { context } from "../context/context";
 
 export default function Summary(){
-    const [step, setStep,, newData] = useContext(context);
+    const {step, setStep, newData} = useContext(context);
     let total = newData.yearly ? newData.plan.yearPrice : newData.plan.monthPrice ;
 
     return (
@@ -22,15 +22,13 @@ export default function Summary(){
                         {
                             newData.addons.map((addon, index) => 
                                 {
-                                    if (addon.selected) { 
-                                        total += addon.price;
-                                        return (
-                                            <div key={index} className="flex justify-between items-center text-[14px] text-[#9699ab] my-2">
-                                                <h2>{addon.name}</h2>
-                                                <p>+${addon.price}/{newData.yearly ? 'yr' : 'mo'}</p>
-                                            </div>
-                                        )
-                                    }
+                                    total += newData.yearly ? addon.yearPrice : addon.monthPrice;
+                                    return (
+                                        <div key={index} className="flex justify-between items-center text-[14px] text-[#9699ab] my-2">
+                                            <h2>{addon.name}</h2>
+                                            <p>+${newData.yearly ? addon.yearPrice : addon.monthPrice}/{newData.yearly ? 'yr' : 'mo'}</p>
+                                        </div>
+                                    )
                                 }
                             )
                         }
