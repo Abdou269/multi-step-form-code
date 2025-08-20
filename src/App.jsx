@@ -16,7 +16,7 @@ const data = {
     },
     yearly: false,
     plan: plans[0],
-    addons: null,
+    addons: [],
 }
 
 export default function App(){
